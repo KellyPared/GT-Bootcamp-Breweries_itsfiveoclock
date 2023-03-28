@@ -8,7 +8,7 @@ And, of course, if there is time, we'll dive deep into the data to uncover any p
 
 Our data is coming from the following websites:
 * https://untappd.com/
-https://api.openbrewerydb.org/breweries 
+* https://api.openbrewerydb.org/breweries 
 
 
 
