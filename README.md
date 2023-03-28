@@ -7,7 +7,7 @@ Our website will offer an innovative approach to exploring the world of beer by 
 And, of course, if there is time, we'll dive deep into the data to uncover any patterns or trends emerging in the beer industry. So whether you're a seasoned beer enthusiast or just getting started, our interactive website is the ultimate guide to exploring the world of brews. Cheers!
 
 Our data is coming from the following websites:
-https://untappd.com/
+* https://untappd.com/
 https://api.openbrewerydb.org/breweries 
 
 
