@@ -11,3 +11,16 @@
       font-size: 3.5rem;
     }
   }
+
+  /* Modify brand and text color */
+.sidebarMenu {
+    background-color: #cfc424;
+}
+
+#nav-item {
+  background-color: #cfc424;
+}
+
+#nav-link {
+  background-color: #cfc424;
+}
