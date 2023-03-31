@@ -104,7 +104,8 @@ d3.select("table").remove();
         //give the table an id
         .attr("id", "BrewType")
         .style("border-collapse", "collapse")
-        .style("border", "2px black solid");
+        .style("border", "2px black solid")
+        .style("background-color","white");
         var thead = table.append('thead')
         var	tbody = table.append('tbody');
     
@@ -250,7 +251,8 @@ function Citi(selectedCiti){
                     //give the table an id
                     .attr("id", "BrewType")
                     .style("border-collapse", "collapse")
-                    .style("border", "2px black solid");
+                    .style("border", "2px black solid")
+                    .style("background-color","white");
                     var thead = table.append('thead')
                     var	tbody = table.append('tbody');
                 
