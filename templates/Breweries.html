@@ -56,14 +56,17 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-md-4 col-lg-3"> </div>
+
       <header class="d-flex justify-content-left py-8">
         <ul class="nav nav-pills">
           <li class="nav-item" style="font-size: 1.2pc;"><a href="/index.html" class="nav-link">Home</a></li>
           <li class="nav-item" style="font-size: 1.2pc;"><a href="/Breweries.html" class="nav-link active"
-            aria-current="page">Breweries</a>
+              aria-current="page">Breweries</a>
           </li>
           <li class="nav-item" style="font-size: 1.2pc;"><a href="#" class="nav-link">FAQs</a></li>
           <li class="nav-item" style="font-size: 1.2pc;"><a href="#" class="nav-link">About</a></li>
+
+
         </ul>
         <hr>
         </hr>
@@ -72,18 +75,32 @@
   </div>
 
 
-  <!-- The div where we'll insert our map -->
-  <div id="map"></div>
 
 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
 
+        <div class="well" style="background-color: #74b0d3;
+    text-align: left; font-size: 1pc;">
+          <h3 style="font-size: 1.5pc;">City:</h3>
+          <select id="selDataset" onchange="optionChanged(this.value)"></select>
+        </div>
 
+      </div>
+    </div>
+  </div>
 
+  <div id="map">
+
+  </div>
 
 
   <!-- JavaScript file -->
-  <script type="text/javascript" src="../static/js/map.js"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script type="text/javascript" src="../static/js/map.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
     crossorigin="anonymous"></script>

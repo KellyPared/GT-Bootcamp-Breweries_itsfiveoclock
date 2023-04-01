@@ -46,9 +46,20 @@ def datajson():
 
     return jsonify(data_untappd)
 
-@app.route("/api/brewery_list_api_coordintes.geojson")
+
+@app.route("/api/brewery_api_export_MD.json")
+def dataapijson():
+    #connect to Mongodb databse
+    with open('data/brewery_api_export_MD.json', 'r', encoding="utf8") as myfile:
+        data_api = myfile.read()
+        data_api= json.loads(data_api)
+
+    return jsonify(data_api)
+
+
+@app.route("/api/brewery_api.geojson")
 def datageojson():
-    with open('data/brewery_list_api_coordintes.geojson', 'r', encoding="utf8") as myfile:
+    with open('data/brewery_api.geojson', 'r', encoding="utf8") as myfile:
         data_api = myfile.read()
         data_api= json.loads(data_api)
 
