@@ -16,95 +16,72 @@ d3.json(url).then(function(x) {
     for ( let i=0; i<x.length; i++){
         d3.select("#selectpicker").append("option").text(distinctCities[i]).property("value",distinctCities[i] )
         d3.select("#selDataset").append("option").text(distinctTypes[i]).property("value",distinctTypes[i])
-   }
+        d3.select("#selectpicker").append("optgroup").append("label").text(distinctCities[i]).property("value",distinctCities[i] )
+    }
 })
-//    //ploting the id 940 as the initial set of plots
-//    let samples=x.samples.filter(function(f){return f.id==940})
-//             console.log(samples)
-//         let samplesValue= samples[0].sample_values.slice(0,10).reverse()
-//             console.log(samplesValue)
-//         let samplesLabels= samples[0].otu_labels.slice(0,10).reverse()
-//             console.log(samplesLabels)
-//             //map functin is valid on array, therefore we have to pick the otu_id array
-//         let samplesOtu_ids= samples[0].otu_ids.map(x=> `OTU_${x}`).slice(0,10).reverse()
-//             console.log(samplesOtu_ids)
 
-//         let trace1={
-//             x:samplesValue,
-//             y:samplesOtu_ids,
-//             type:"bar",
-//             orientation: 'h'
-//         }
-//         let data=[trace1];
-
-//         Plotly.newPlot('bar',data);
-
-
-
-//     //Bubble plot
-//     let samples2=x.samples.filter(function(f){return f.id==940})
-//             console.log(samples2)
-//     let samplesValue2= samples2[0].sample_values
-//             console.log(samplesValue2)
-//     let samplesLabels2= samples2[0].otu_labels
-//             console.log(samplesLabels2)
-//     //map functin is valid on array, therefore we have to pick the otu_id array
-//     let samplesOtu_ids2= samples2[0].otu_ids
-//             console.log(samplesOtu_ids2)
-    
-//     //Bubble plot
-//         let trace2= {
-//             x: samplesOtu_ids2,
-//             y: samplesValue2,
-//             text: samplesLabels2,
-//             mode: 'markers',
-//             marker: {
-//              color: samplesOtu_ids2,
-//              size: samplesValue2,
-//                 }
-//               };
-              
-//             let data2 = [trace2];
-              
-//             let layout = {
-//                 title: 'Bubble Chart',
-//                 showlegend: false,
-//                 height: 600,
-//                 width: 1200
-//               };
-              
-//               Plotly.newPlot('bubble', data2, layout);
-
-//     //adding the panel info
-
-//         let panelInfo=x.metadata.filter(f=> f.id==940)
-//         console.log(panelInfo);
-        
-//         //clearing the demographic panel
-//         d3.select(".marginclass").remove();
-//         //Adding the demographic infop to the panel
-//         d3.select(".panel-primary").append("p").html(`id: ${panelInfo[0].id} <br> ethnicity:  ${panelInfo[0].ethnicity} <br>
-//          gender:  ${panelInfo[0].gender} <br> age:  ${panelInfo[0].age} <br>
-//           location:  ${panelInfo[0].location} bbtype:  ${panelInfo[0].bbtype} <br> wfreq:  ${panelInfo[0].wfreq}`).attr("class", "marginclass");
-         
-//     });
-
-// //defining a function that does the ploting
-
+//Defining a function that plots the chart and table for Brewery type
 function Type(selectedType){
     d3.json(url).then(function(x) {
         //bar chart
         let breweryType=x.filter(f=>f.brewery_type==selectedType)
             console.log(breweryType)
 
+//plot the bar chart
+
+let breweries = [];
+        let values = [];
+        let types = [];
+        let place=[]
+
+        breweryType.forEach((point)=>{
+            breweries.push(point.brewery_name);
+            values.push(parseFloat(point.brewery_ratings.replace(/[{()}]/g, '')));
+            types.push(point.brewery_type);
+            place.push(point.brewery_location);
+        })
+
+        let yticks = breweries.slice(0, 10).reverse();
+            let xticks = values.slice(0, 10).reverse();
+            let labels = place.slice(0, 10).reverse();
+    
+            let trace = {
+                x: xticks,
+                y: yticks,
+                text: labels,
+                type: "bar",
+                orientation: "h",
+            };
+    
+            let layout = {
+                title: "Top 10 Breweries by Type",
+                width: 500,
+                height: 250,
+                yaxis: {
+                automargin: true
+                },
+                margin: {
+                  l: 100,
+                  r: 0,
+                  b: 50,
+                  t: 50,
+                  pad: 0}
+            };
+    
+            Plotly.newPlot("bar", [trace], layout)
+
+
+//Draw the table
 d3.select("table").remove();
+
 // copyrigh to : https://gist.github.com/jfreels/6733593 and to https://www.htmlgoodies.com/javascript/bring-your-data-to-life-with-d3-js/
     function tabulate(data, columns) {
         var table = d3.select('.col-md-6').append('table')
         //give the table an id
         .attr("id", "BrewType")
         .style("border-collapse", "collapse")
-        .style("border", "2px black solid");
+        .style("border", "2px black solid")
+        .style("background-color","white");
         var thead = table.append('thead')
         var	tbody = table.append('tbody');
     
@@ -167,71 +144,6 @@ d3.select("table").remove();
 
 
 
-        // let samplesValue= samples[0].sample_values.slice(0,10).reverse()
-        //     console.log(samplesValue)
-        // let samplesLabels= samples[0].otu_labels.slice(0,10).reverse()
-        //     console.log(samplesLabels)
-        //     //map functin is valid on array, therefore we have to pick the otu_id array
-        // let samplesOtu_ids= samples[0].otu_ids.map(x=> `OTU_${x}`).slice(0,10).reverse()
-        //     console.log(samplesOtu_ids)
-
-        
-        // let trace1={
-        //     x:samplesValue,
-        //     y:samplesOtu_ids,
-        //     type:"bar",
-        //     orientation: 'h'
-        // }
-        // let data=[trace1];
-
-        // Plotly.newPlot('bar',data)
-
-
-        // //Bubble plot
-        // let samples2=x.samples.filter(function(f){return f.id==selectedid})
-        //     console.log(samples2)
-        // let samplesValue2= samples2[0].sample_values
-        //     console.log(samplesValue2)
-        // let samplesLabels2= samples2[0].otu_labels
-        //     console.log(samplesLabels2)
-        //     //map functin is valid on array, therefore we have to pick the otu_id array
-        // let samplesOtu_ids2= samples2[0].otu_ids
-        //     console.log(samplesOtu_ids2)
-
-        // //Bubble plot
-        // let trace2= {
-        //     x: samplesOtu_ids2,
-        //     y: samplesValue2,
-        //     text: samplesLabels2,
-        //     mode: 'markers',
-        //     marker: {
-        //       color: samplesOtu_ids2,
-        //       size: samplesValue2,
-        //     }
-        //   };
-          
-        //   let data2 = [trace2];
-          
-        //   let layout = {
-        //     title: 'Bubble Chart',
-        //     showlegend: false,
-        //     height: 600,
-        //     width: 1200
-        //   };
-          
-        //   Plotly.newPlot('bubble', data2, layout);
-
-        //   //adding the panel info
-
-        // let panelInfo=x.metadata.filter(f=> f.id==selectedid)
-        //     console.log(panelInfo);
-            
-        //     //clearing the demographic panel
-        //     d3.select(".marginclass").remove();
-        //     //Adding the demographic infop to the panel
-        //     d3.select(".panel-primary").append("p").html(`id: ${panelInfo[0].id} <br> ethnicity:  ${panelInfo[0].ethnicity} <br>
-        //     gender:  ${panelInfo[0].gender} <br> age:  ${panelInfo[0].age} <br>
-        //      location:  ${panelInfo[0].location} bbtype:  ${panelInfo[0].bbtype} <br> wfreq:  ${panelInfo[0].wfreq}`).attr("class", "marginclass");
              
         });
     }      
@@ -242,15 +154,16 @@ function Citi(selectedCiti){
         let breweryCiti=x.filter(f=>f.brewery_location==selectedCiti)
             console.log(breweryCiti)
 
-
+            
             d3.select("table").remove();
             // copyrigh to : https://gist.github.com/jfreels/6733593 and to https://www.htmlgoodies.com/javascript/bring-your-data-to-life-with-d3-js/
                 function tabulate(data, columns) {
-                    var table = d3.select('.col-md-5').append('table')
+                    var table = d3.select('.col-md-6').append('table')
                     //give the table an id
                     .attr("id", "BrewType")
                     .style("border-collapse", "collapse")
-                    .style("border", "2px black solid");
+                    .style("border", "2px black solid")
+                    .style("background-color","white");
                     var thead = table.append('thead')
                     var	tbody = table.append('tbody');
                 
@@ -264,7 +177,7 @@ function Citi(selectedCiti){
                     .style("padding", "5px")
                     .style("background-color", "orange")
                     .style("font-weight", "bold")
-                    .style("text-transform", "uppercase")
+                    .style("text-transform", "uppercase");
             
                         
             
